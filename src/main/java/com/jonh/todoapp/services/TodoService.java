@@ -2,6 +2,7 @@ package com.jonh.todoapp.services;
 
 import com.jonh.todoapp.entities.Todo;
 import com.jonh.todoapp.repositories.TodoRepository;
+import com.jonh.todoapp.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class TodoService {
 
     public Todo findById(Integer id) {
         Optional<Todo> obj = repository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! Id: " + id + ", Type: " + Todo.class.getName()));
     }
 
 
@@ -42,5 +43,14 @@ public class TodoService {
 
     public void delete(Integer id) {
         repository.deleteById(id);
+    }
+
+    public Todo update(Integer id, Todo obj) {
+        Todo newObj = findById(id);
+        newObj.setTitle(obj.getTitle());
+        newObj.setDateToFinish(obj.getDateToFinish());
+        newObj.setDescription(obj.getDescription());
+        newObj.setFinished(obj.getFinished());
+        return repository.save(newObj);
     }
 }
