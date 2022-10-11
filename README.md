@@ -18,6 +18,10 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ##
 
+### Como rodar a aplicação
+
+1 - 
+
 ### Autor
 
 ![avatar](https://user-images.githubusercontent.com/101439670/181940218-4f68ffb9-0d35-40df-b8e9-86629333d244.png)
